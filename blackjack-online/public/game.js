@@ -52,7 +52,27 @@ class SinglePlayerScene extends Phaser.Scene {
         this.startButton = this.add.text(400, 300, 'START GAME', { fontSize: '32px', fill: '#0f0', backgroundColor: '#000', padding: 10 }).setOrigin(0.5).setInteractive();
         this.hitButton = this.add.text(300, 500, 'HIT', { fontSize: '24px', fill: '#fff', backgroundColor: '#333', padding: 10 }).setOrigin(0.5).setInteractive().setVisible(false);
         this.stayButton = this.add.text(500, 500, 'STAY', { fontSize: '24px', fill: '#fff', backgroundColor: '#333', padding: 10 }).setOrigin(0.5).setInteractive().setVisible(false);
+// ==========================================
+// Add this AFTER the stayButton creation
+// ==========================================
 
+// Menu Button (top-left corner)
+const menuButton = this.add.text(30, 30, '⬅ MENU', { 
+    fontSize: '16px', 
+    fill: '#fff', 
+    backgroundColor: '#333',
+    padding: { x: 10, y: 8 }
+}).setOrigin(0, 0).setInteractive().setDepth(100);
+
+menuButton.on('pointerdown', () => {
+    // Clean up any lingering socket listeners
+    this.socket.off('gameState');
+    this.socket.off('receiveCard');
+    this.socket.off('dealerTurn');
+    
+    // Return to main menu
+    this.scene.start('MainMenuScene');
+});
         // Input Logic
         this.startButton.on('pointerdown', () => {
             this.socket.emit('startGame');
@@ -514,5 +534,20 @@ class MultiplayerScene extends Phaser.Scene {
 
         // Request updated room state from server
         this.socket.emit('getRoomStatus', this.currentRoom);
+        
     }
 }
+// ==========================================
+// 4. PHASER CONFIGURATION
+// ==========================================
+const config = {
+    type: Phaser.AUTO,
+    parent: 'game-container',
+    width: 800,
+    height: 600,
+    backgroundColor: '#2d2d2d',
+    render: { pixelArt: true, antialias: false },
+    scene: [MainMenuScene, SinglePlayerScene, MultiplayerScene] 
+};
+
+const game = new Phaser.Game(config);
