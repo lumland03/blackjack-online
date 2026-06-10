@@ -271,7 +271,8 @@ class MultiplayerScene extends Phaser.Scene {
             this.gameContainer = this.add.container(0, 0);
 
             // Render dealer cards
-            const dealerLabel = this.add.text(600, 300, 'DEALER', { fontSize: '20px', fill: '#ff6b6b', fontStyle: 'bold' });
+            // ✅ FIX #3: Move dealer label above cards (y: 130 instead of 300)
+            const dealerLabel = this.add.text(600, 130, 'DEALER', { fontSize: '20px', fill: '#ff6b6b', fontStyle: 'bold' });
             dealerLabel.setOrigin(0.5);
             this.gameContainer.add(dealerLabel);
 
@@ -362,15 +363,89 @@ class MultiplayerScene extends Phaser.Scene {
         });
 
         // Listen for turn changes
-        this.socket.on('turnChange', (data) => {
-            console.log(`It is now player ${data.currentTurnId}'s turn.`);
-            if (data.currentTurnId === this.socket.id) {
-                this.hitButton.setVisible(true);
-                this.stayButton.setVisible(true);
-            } else {
-                if (this.hitButton) this.hitButton.setVisible(false);
-                if (this.stayButton) this.stayButton.setVisible(false);
+this.socket.on('turnChange', (data) => {
+    console.log(`It is now player ${data.currentTurnId}'s turn.`);
+    
+    // Only proceed if buttons exist
+    if (!this.hitButton || !this.stayButton) {
+        console.warn('Buttons not ready yet');
+        return;
+    }
+    
+    if (data.currentTurnId === this.socket.id) {
+        this.hitButton.setVisible(true);
+        this.stayButton.setVisible(true);
+    } else {
+        this.hitButton.setVisible(false);
+        this.stayButton.setVisible(false);
+    }
+});
+
+        this.socket.on('dealerTurning', () => {
+    console.log('Dealer is drawing cards...');
+    
+    // Only proceed if buttons exist
+    if (!this.hitButton || !this.stayButton) {
+        console.warn('Buttons not ready for dealer turn');
+        return;
+    }
+    
+    // Hide buttons during dealer turn
+    if (this.hitButton) this.hitButton.setVisible(false);
+    if (this.stayButton) this.stayButton.setVisible(false);
+    
+    if (this.gameContainer) {
+        const drawingText = this.add.text(600, 300, 'Dealer Drawing...', {
+            fontSize: '24px',
+            fill: '#ffff00',
+            fontStyle: 'bold'
+        }).setOrigin(0.5).setDepth(102);
+        
+        this.time.delayedCall(2000, () => {
+            if (drawingText) drawingText.destroy();
+        });
+    }
+});
+
+        // ✅ Listen for each dealer card being drawn
+        this.socket.on('dealerCard', (data) => {
+            console.log('✅ Dealer card event received:', data.card);
+            
+            if (!this.gameContainer) {
+                console.warn('❌ gameContainer does not exist!');
+                return;
             }
+            
+            // Position for dealer cards (same as initial setup)
+            const dealerCardX = 550;
+            const cardCount = data.dealerHand ? data.dealerHand.length : 0;
+            const xPos = dealerCardX + ((cardCount - 1) * 100);
+            
+            console.log(`Creating card at position x=${xPos}, cardCount=${cardCount}`);
+            
+            // Add the new dealer card with animation
+            const cardSprite = this.add.image(
+                xPos,
+                200,
+                'cardDeck',
+                `card${data.card.suit}${data.card.value}.png`
+            ).setOrigin(0.5).setScale(0.1); // Start small
+            
+            console.log(`Card sprite created: ${data.card.value}${data.card.suit}`);
+            
+            // Animate card appearing (scale up)
+            this.tweens.add({
+                targets: cardSprite,
+                scale: { from: 0.1, to: 0.8 },
+                duration: 500,
+                ease: 'Bounce.out',
+                onComplete: () => {
+                    console.log(`Card animation complete for ${data.card.value}${data.card.suit}`);
+                }
+            });
+            
+            this.gameContainer.add(cardSprite);
+            console.log(`Card added to gameContainer`);
         });
 
         this.socket.on('playerUpdate', (data) => {
@@ -434,11 +509,12 @@ class MultiplayerScene extends Phaser.Scene {
             const holeCard = this.gameContainer.getByName('dealerHoleCard');
             if (holeCard) holeCard.destroy();
 
-            const dealerCardX = 500;
+            // ✅ FIX #2: Changed dealerCardX from 500 to 550 (consistent with multiGameState)
+            const dealerCardX = 550;
             data.dealerHand.forEach((card, idx) => {
                 // Skip index 0 since the upcard is already there
                 if (idx > 0) { 
-                    const sprite = this.add.image(dealerCardX + (idx * 100), 100, 'cardDeck', `card${card.suit}${card.value}.png`).setOrigin(0.5).setScale(0.8);
+                    const sprite = this.add.image(dealerCardX + (idx * 100), 200, 'cardDeck', `card${card.suit}${card.value}.png`).setOrigin(0.5).setScale(0.8);
                     this.gameContainer.add(sprite);
                 }
             });
@@ -513,6 +589,8 @@ class MultiplayerScene extends Phaser.Scene {
             this.socket.off('roomError');
             this.socket.off('multiGameState');
             this.socket.off('turnChange');
+            this.socket.off('dealerTurning');
+            this.socket.off('dealerCard');
             this.socket.off('playerUpdate');
             this.socket.off('gameResults');
         });

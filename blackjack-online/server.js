@@ -418,49 +418,82 @@ function setupMultiplayerLogic(socket) {
         const allFinished = room.players.every(p => p.status === 'stayed' || p.status === 'busted');
         
         if (allFinished) {
-            let dScore = calculateScore(room.dealerHand);
-            while (dScore < 17) {
-                if (room.deck.length < 1) room.deck = shuffle(createDeck());
-                room.dealerHand.push(room.deck.pop());
-                dScore = calculateScore(room.dealerHand);
-            }
+            // ✅ DELAY: Tell clients dealer is about to draw
+            io.to(roomName).emit('dealerTurning');
             
-            const results = room.players.map(p => {
-                let result = '';
-                if (p.status === 'busted') {
-                    result = 'Busted!';
-                } else if (dScore > 21) {
-                    result = 'Won!';
-                } else if (p.score > dScore) {
-                    result = 'Won!';
-                } else if (p.score < dScore) {
-                    result = 'Lost!';
-                } else {
-                    result = 'Push!';
-                }
-                return { playerId: p.id, result, dealerScore: dScore };
-            });
-            
-            io.to(roomName).emit('gameResults', {
-                dealerHand: room.dealerHand,
-                results: results
-            });
-
+            // ✅ DELAY: Wait 2 seconds before actually drawing
             setTimeout(() => {
-                if (rooms[roomName]) {
-                    console.log(`[Multiplayer] Resetting Room ${roomName} for next round`);
-                    room.status = 'waiting';
-                    room.dealerHand = [];
-                    // 🔧 FIX: Do NOT recreate the deck completely here. Let it persist for the next round.
+                let dScore = calculateScore(room.dealerHand);
+                console.log(`[Dealer] Starting dealer turn with score: ${dScore}`);
+                let delayTime = 0;
+                let cardsDrawn = 0;
+                
+                while (dScore < 17) {
+                    if (room.deck.length < 1) room.deck = shuffle(createDeck());
+                    const newCard = room.deck.pop();
+                    room.dealerHand.push(newCard);
+                    dScore = calculateScore(room.dealerHand);
+                    cardsDrawn++;
                     
-                    room.players.forEach(p => {
-                        p.hand = [];
-                        p.score = 0;
-                        p.isReady = false;
-                        p.status = 'waiting';
-                    });
+                    console.log(`[Dealer] Drew card ${cardsDrawn}: ${newCard.value}${newCard.suit}, new score: ${dScore}`);
+                    
+                    // ✅ Emit each dealer card draw with animation delay
+                    delayTime += 600;
+                    ((card, handSnapshot, delayMs) => {
+                        setTimeout(() => {
+                            console.log(`[Dealer] Emitting card ${card.value}${card.suit} at delay ${delayMs}ms`);
+                            io.to(roomName).emit('dealerCard', {
+                                card: card,
+                                dealerHand: handSnapshot
+                            });
+                        }, delayMs);
+                    })(newCard, [...room.dealerHand], delayTime);
                 }
-            }, 3000);
+                
+                console.log(`[Dealer] Finished drawing. Total cards drawn: ${cardsDrawn}, final score: ${dScore}`);
+                
+                // Wait for all cards to animate before showing results
+                const resultDelay = cardsDrawn > 0 ? delayTime + 600 : 100;
+                setTimeout(() => {
+                    console.log(`[Dealer] All cards drawn. Showing results.`);
+                    const results = room.players.map(p => {
+                    let result = '';
+                    if (p.status === 'busted') {
+                        result = 'Busted!';
+                    } else if (dScore > 21) {
+                        result = 'Won!';
+                    } else if (p.score > dScore) {
+                        result = 'Won!';
+                    } else if (p.score < dScore) {
+                        result = 'Lost!';
+                    } else {
+                        result = 'Push!';
+                    }
+                    return { playerId: p.id, result, dealerScore: dScore };
+                    });
+                    
+                    io.to(roomName).emit('gameResults', {
+                        dealerHand: room.dealerHand,
+                        results: results
+                    });
+
+                    setTimeout(() => {
+                        if (rooms[roomName]) {
+                            console.log(`[Multiplayer] Resetting Room ${roomName} for next round`);
+                            room.status = 'waiting';
+                            room.dealerHand = [];
+                            // 🔧 FIX: Do NOT recreate the deck completely here. Let it persist for the next round.
+                            
+                            room.players.forEach(p => {
+                                p.hand = [];
+                                p.score = 0;
+                                p.isReady = false;
+                                p.status = 'waiting';
+                            });
+                        }
+                    }, 3000);
+                    }, resultDelay); // Wait for all animations to complete before showing results
+            }, 2000); // 2 second delay for dealer drawing animation
         }
     }
 }
