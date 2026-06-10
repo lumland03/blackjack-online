@@ -15,16 +15,16 @@ class MainMenuScene extends Phaser.Scene {
     constructor() { super('MainMenuScene'); }
 
     create() {
-        this.add.text(600, 150, 'BLACKJACK ONLINE', { fontSize: '40px', fill: '#fff' }).setOrigin(0.5);
+        this.add.text(600, 150, 'BLACKJACK ONLINE', { fontSize: '40px', fill: '#fff', fontFamily: 'JQKAS' }).setOrigin(0.5);
 
         // Single Player Button
-        const spButton = this.add.text(600, 300, 'SINGLE PLAYER', { fontSize: '28px', fill: '#0f0', backgroundColor: '#000', padding: 15 }).setOrigin(0.5).setInteractive();
+        const spButton = this.add.text(600, 300, 'SINGLE PLAYER', { fontSize: '28px', fill: '#D4AF37', backgroundColor: '#062904', padding: 15, fontFamily: 'JQKAS',  }).setOrigin(0.5).setInteractive();
         spButton.on('pointerdown', () => {
             this.scene.start('SinglePlayerScene');
         });
 
         // Multiplayer Button
-        const mpButton = this.add.text(600, 420, 'MULTIPLAYER', { fontSize: '28px', fill: '#00f', backgroundColor: '#000', padding: 15 }).setOrigin(0.5).setInteractive();
+        const mpButton = this.add.text(600, 420, 'MULTIPLAYER', { fontSize: '28px', fill: '#D4AF37', backgroundColor: '#062904', padding: 15, fontFamily: 'JQKAS' }).setOrigin(0.5).setInteractive();
         mpButton.on('pointerdown', () => {
             this.scene.start('MultiplayerScene');
         });
@@ -53,17 +53,18 @@ class SinglePlayerScene extends Phaser.Scene {
         this.isRoundActive = false; 
 
         // UI Components
-        this.scoreText = this.add.text(600, 760, 'Score: 0', { fontSize: '20px', fill: '#fff' }).setOrigin(0.5);
-        this.startButton = this.add.text(600, 350, 'START GAME', { fontSize: '32px', fill: '#0f0', backgroundColor: '#000', padding: 10 }).setOrigin(0.5).setInteractive();
-        this.hitButton = this.add.text(450, 650, 'HIT', { fontSize: '24px', fill: '#fff', backgroundColor: '#333', padding: 10 }).setOrigin(0.5).setInteractive().setVisible(false);
-        this.stayButton = this.add.text(750, 650, 'STAY', { fontSize: '24px', fill: '#fff', backgroundColor: '#333', padding: 10 }).setOrigin(0.5).setInteractive().setVisible(false);
+        this.scoreText = this.add.text(600, 760, 'Score: 0', { fontSize: '20px', fill: '#fff', fontFamily: 'JQKAS' }).setOrigin(0.5);
+        this.startButton = this.add.text(600, 350, 'START GAME', { fontSize: '28px', fill: '#D4AF37', backgroundColor: '#062904', padding: 15, fontFamily: 'JQKAS' }).setOrigin(0.5).setInteractive();
+        this.hitButton = this.add.text(450, 650, 'HIT', { fontSize: '24px', fill: '#D4AF37', backgroundColor: '#062904', padding: 10, fontFamily: 'JQKAS' }).setOrigin(0.5).setInteractive().setVisible(false);
+        this.stayButton = this.add.text(750, 650, 'STAY', { fontSize: '24px', fill: '#D4AF37', backgroundColor: '#062904', padding: 10, fontFamily: 'JQKAS' }).setOrigin(0.5).setInteractive().setVisible(false);
 
         // Menu Button (top-left corner - intentionally not centered)
         const menuButton = this.add.text(30, 30, '⬅ MENU', { 
             fontSize: '16px', 
-            fill: '#fff', 
-            backgroundColor: '#333',
-            padding: { x: 10, y: 8 }
+            fill: '#D4AF37', 
+            backgroundColor: '#062904',
+            padding: { x: 10, y: 8 },
+            fontFamily: 'JQKAS'
         }).setOrigin(0, 0).setInteractive().setDepth(100);
 
         menuButton.on('pointerdown', () => {
@@ -122,7 +123,7 @@ class SinglePlayerScene extends Phaser.Scene {
                 });
 
                 this.scoreText.setText(`Score: 21 - BLACKJACK!`);
-                const bjText = this.add.text(600, 350, 'BLACKJACK!', { fontSize: '48px', fill: '#ff0', backgroundColor: '#000', padding: 20 }).setOrigin(0.5);
+                const bjText = this.add.text(600, 350, 'BLACKJACK!', { fontSize: '48px', fill: '#ff0', backgroundColor: '#000', padding: 20, fontFamily: 'JQKAS' }).setOrigin(0.5);
                 
                 this.time.delayedCall(3000, () => {
                     if (bjText) bjText.destroy();
@@ -175,7 +176,7 @@ class SinglePlayerScene extends Phaser.Scene {
                 this.dealerSprites.push(sprite);
             });
 
-            const resultText = this.add.text(600, 350, data.result, { fontSize: '40px', fill: '#ff0', backgroundColor: '#000', padding: 20 }).setOrigin(0.5);
+            const resultText = this.add.text(600, 350, data.result, { fontSize: '40px', fill: '#ff0', backgroundColor: '#000', padding: 20, fontFamily: 'JQKAS' }).setOrigin(0.5);
             this.scoreText.setText(`Final - Dealer: ${data.dealerScore}`);
 
             this.time.delayedCall(3000, () => {
@@ -217,11 +218,11 @@ class MultiplayerScene extends Phaser.Scene {
         this.gameContainer = null; 
 
         // UI Text Components
-        this.statusText = this.add.text(600, 30, 'MULTIPLAYER LOBBY', { fontSize: '32px', fill: '#fff' }).setOrigin(0.5);
-        this.lobbyInfoText = this.add.text(600, 120, 'Connecting to multiplayer pool...', { fontSize: '16px', fill: '#aaa', align: 'center' }).setOrigin(0.5);
+        this.statusText = this.add.text(600, 30, 'MULTIPLAYER LOBBY', { fontSize: '32px', fill: '#fff', fontFamily: 'JQKAS' }).setOrigin(0.5);
+        this.lobbyInfoText = this.add.text(600, 120, 'Connecting to multiplayer pool...', { fontSize: '16px', fill: '#aaa', align: 'center', fontFamily: 'JQKAS' }).setOrigin(0.5);
 
         // Fixed Ready Button
-        this.readyButton = this.add.text(600, 750, 'TAP TO READY UP', { fontSize: '24px', fill: '#fff', backgroundColor: '#333', padding: 12 })
+        this.readyButton = this.add.text(600, 750, 'TAP TO READY UP', { fontSize: '24px', fill: '#D4AF37', backgroundColor: '#062904', padding: 12, fontFamily: 'JQKAS' })
             .setOrigin(0.5)
             .setInteractive()
             .setVisible(false)
@@ -259,8 +260,7 @@ class MultiplayerScene extends Phaser.Scene {
 
         this.socket.on('multiGameState', (data) => {
             this.gameActive = true;
-            this.statusText.setText('MULTIPLAYER GAME!');
-            this.statusText.setFill('#0f0');
+            this.statusText.setVisible(false);
             this.lobbyInfoText.setVisible(false);
             this.readyButton.setVisible(false);
 
@@ -272,15 +272,23 @@ class MultiplayerScene extends Phaser.Scene {
 
             // Render dealer cards
             // ✅ FIX #3: Move dealer label above cards (y: 130 instead of 300)
-            const dealerLabel = this.add.text(600, 130, 'DEALER', { fontSize: '20px', fill: '#ff6b6b', fontStyle: 'bold' });
+            const dealerLabel = this.add.text(600, 130, 'DEALER', { fontSize: '20px', fill: '#ff6b6b', fontStyle: 'bold', fontFamily: 'JQKAS' });
             dealerLabel.setOrigin(0.5);
             this.gameContainer.add(dealerLabel);
 
+            // ✅ Turn Indicator
+            this.turnIndicator = this.add.text(600, 60, '🎮 Your Turn!', { fontSize: '18px', fill: '#ffff00', fontStyle: 'bold', backgroundColor: '#333', padding: { x: 15, y: 8 }, fontFamily: 'JQKAS' });
+            this.turnIndicator.setOrigin(0.5).setDepth(50);
+            if (data.currentTurnId !== this.socket.id) {
+                this.turnIndicator.setText('⏳ Waiting for players...');
+                this.turnIndicator.setFill('#aaa');
+            }
+
             const dealerCardX = 550;
             // Show Up Card
-            const upCardSprite = this.add.image(dealerCardX, 200, 'cardDeck', `card${data.dealerUpCard.suit}${data.dealerUpCard.value}.png`).setOrigin(0.5).setScale(0.8);
+            const upCardSprite = this.add.image(dealerCardX, 260, 'cardDeck', `card${data.dealerUpCard.suit}${data.dealerUpCard.value}.png`).setOrigin(0.5).setScale(0.8);
             // Show Hole Card (Face Down)
-            const holeCardSprite = this.add.image(dealerCardX + 100, 200, 'cardBacks', 'cardBack_red2.png').setOrigin(0.5).setScale(0.8);
+            const holeCardSprite = this.add.image(dealerCardX + 100, 260, 'cardBacks', 'cardBack_red2.png').setOrigin(0.5).setScale(0.8);
             holeCardSprite.setName('dealerHoleCard');
 
             this.gameContainer.add([upCardSprite, holeCardSprite]);
@@ -303,7 +311,7 @@ class MultiplayerScene extends Phaser.Scene {
                 const playerColor = player.id === this.socket.id ? '#00ff00' : '#aaaaaa';
                 
                 // Player label
-                const label = this.add.text(pos.x, pos.y - 100, pos.label + isYou, { fontSize: '14px', fill: playerColor, fontStyle: 'bold' });
+                const label = this.add.text(pos.x, pos.y - 100, pos.label + isYou, { fontSize: '14px', fill: playerColor, fontStyle: 'bold', fontFamily: 'JQKAS' });
                 label.setOrigin(0.5);
                 this.gameContainer.add(label);
                 
@@ -321,20 +329,20 @@ class MultiplayerScene extends Phaser.Scene {
 
                 // Player score
                 const scoreText = this.add.text(pos.x, pos.y + 90, `Score: ${player.score}`, 
-                    { fontSize: '16px', fill: '#fff', fontStyle: 'bold' });
+                    { fontSize: '16px', fill: '#fff', fontStyle: 'bold', fontFamily: 'JQKAS' });
                 scoreText.setOrigin(0.5);
                 scoreText.setName(`score_${player.id}`);
                 this.gameContainer.add(scoreText);
             });
 
             // Hit and Stay buttons
-            this.hitButton = this.add.text(450, 720, 'HIT', { fontSize: '24px', fill: '#fff', backgroundColor: '#333', padding: 10 })
+            this.hitButton = this.add.text(450, 720, 'HIT', { fontSize: '24px', fill: '#D4AF37', backgroundColor: '#062904', padding: 10, fontFamily: 'JQKAS' })
                 .setOrigin(0.5)
                 .setInteractive()
                 .setDepth(10)
                 .setVisible(false);
 
-            this.stayButton = this.add.text(750, 720, 'STAY', { fontSize: '24px', fill: '#fff', backgroundColor: '#333', padding: 10 })
+            this.stayButton = this.add.text(750, 720, 'STAY', { fontSize: '24px', fill: '#D4AF37', backgroundColor: '#062904', padding: 10, fontFamily: 'JQKAS' })
                 .setOrigin(0.5)
                 .setInteractive()
                 .setDepth(10)
@@ -372,12 +380,26 @@ this.socket.on('turnChange', (data) => {
         return;
     }
     
-    if (data.currentTurnId === this.socket.id) {
-        this.hitButton.setVisible(true);
-        this.stayButton.setVisible(true);
+    // Update turn indicator
+    if (this.turnIndicator) {
+        if (data.currentTurnId === this.socket.id) {
+            this.turnIndicator.setText('🎮 Your Turn!').setFill('#ffff00');
+            this.hitButton.setVisible(true);
+            this.stayButton.setVisible(true);
+        } else {
+            this.turnIndicator.setText('⏳ Waiting for players...').setFill('#aaa');
+            this.hitButton.setVisible(false);
+            this.stayButton.setVisible(false);
+        }
     } else {
-        this.hitButton.setVisible(false);
-        this.stayButton.setVisible(false);
+        // Fallback if turnIndicator doesn't exist
+        if (data.currentTurnId === this.socket.id) {
+            this.hitButton.setVisible(true);
+            this.stayButton.setVisible(true);
+        } else {
+            this.hitButton.setVisible(false);
+            this.stayButton.setVisible(false);
+        }
     }
 });
 
@@ -395,10 +417,11 @@ this.socket.on('turnChange', (data) => {
     if (this.stayButton) this.stayButton.setVisible(false);
     
     if (this.gameContainer) {
-        const drawingText = this.add.text(600, 300, 'Dealer Drawing...', {
+        const drawingText = this.add.text(600, 400, 'Dealer Drawing...', {
             fontSize: '24px',
             fill: '#ffff00',
-            fontStyle: 'bold'
+            fontStyle: 'bold',
+            fontFamily: 'JQKAS'
         }).setOrigin(0.5).setDepth(102);
         
         this.time.delayedCall(2000, () => {
@@ -426,7 +449,7 @@ this.socket.on('turnChange', (data) => {
             // Add the new dealer card with animation
             const cardSprite = this.add.image(
                 xPos,
-                200,
+                260,
                 'cardDeck',
                 `card${data.card.suit}${data.card.value}.png`
             ).setOrigin(0.5).setScale(0.1); // Start small
@@ -514,7 +537,7 @@ this.socket.on('turnChange', (data) => {
             data.dealerHand.forEach((card, idx) => {
                 // Skip index 0 since the upcard is already there
                 if (idx > 0) { 
-                    const sprite = this.add.image(dealerCardX + (idx * 100), 200, 'cardDeck', `card${card.suit}${card.value}.png`).setOrigin(0.5).setScale(0.8);
+                    const sprite = this.add.image(dealerCardX + (idx * 100), 260, 'cardDeck', `card${card.suit}${card.value}.png`).setOrigin(0.5).setScale(0.8);
                     this.gameContainer.add(sprite);
                 }
             });
@@ -523,7 +546,7 @@ this.socket.on('turnChange', (data) => {
             const resultsBg = this.add.rectangle(600, 400, 1200, 800, 0x000000, 0.8);
             resultsBg.setOrigin(0.5).setDepth(100);
 
-            const resultsTitle = this.add.text(600, 150, 'ROUND OVER!', { fontSize: '48px', fill: '#ffff00', fontStyle: 'bold' });
+            const resultsTitle = this.add.text(600, 150, 'ROUND OVER!', { fontSize: '48px', fill: '#ffff00', fontStyle: 'bold', fontFamily: 'JQKAS' });
             resultsTitle.setOrigin(0.5).setDepth(101);
             
             const dealerCardsStr = data.dealerHand.map(c => `${c.value}${c.suit[0]}`).join(', ');
@@ -538,17 +561,19 @@ this.socket.on('turnChange', (data) => {
                 fontSize: '18px', 
                 fill: '#fff', 
                 align: 'center',
-                lineSpacing: 10
+                lineSpacing: 10,
+                fontFamily: 'JQKAS'
             });
             resultsText.setOrigin(0.5).setDepth(101);
 
             // Play Again Button
             const playAgainBtn = this.add.text(600, 580, 'READY FOR NEXT ROUND?', { 
                 fontSize: '20px', 
-                fill: '#fff', 
-                backgroundColor: '#0f0', 
+                fill: '#D4AF37', 
+                backgroundColor: '#062904', 
                 padding: 15,
-                align: 'center'
+                align: 'center',
+                fontFamily: 'JQKAS'
             }).setOrigin(0.5).setInteractive().setDepth(101);
 
             playAgainBtn.on('pointerdown', () => {
@@ -566,10 +591,11 @@ this.socket.on('turnChange', (data) => {
             // Back to Menu Button
             const menuBtn = this.add.text(600, 650, 'BACK TO MENU', { 
                 fontSize: '16px', 
-                fill: '#aaa', 
-                backgroundColor: '#333', 
+                fill: '#D4AF37', 
+                backgroundColor: '#062904', 
                 padding: 10,
-                align: 'center'
+                align: 'center',
+                fontFamily: 'JQKAS'
             }).setOrigin(0.5).setInteractive().setDepth(101);
 
             menuBtn.on('pointerdown', () => {
@@ -585,6 +611,12 @@ this.socket.on('turnChange', (data) => {
 
         // --- LIFECYCLE CLEANUP ---
         this.events.on('shutdown', () => {
+            // Destroy turn indicator
+            if (this.turnIndicator) {
+                this.turnIndicator.destroy();
+                this.turnIndicator = null;
+            }
+            
             this.socket.off('roomUpdate');
             this.socket.off('roomError');
             this.socket.off('multiGameState');
@@ -604,6 +636,12 @@ this.socket.on('turnChange', (data) => {
             this.gameContainer.destroy();
         }
 
+        // Destroy turn indicator
+        if (this.turnIndicator) {
+            this.turnIndicator.destroy();
+            this.turnIndicator = null;
+        }
+
         // Hide game buttons
         if (this.hitButton) this.hitButton.setVisible(false);
         if (this.stayButton) this.stayButton.setVisible(false);
@@ -611,6 +649,7 @@ this.socket.on('turnChange', (data) => {
         // Reset state
         this.statusText.setText('MULTIPLAYER LOBBY');
         this.statusText.setFill('#fff');
+        this.statusText.setVisible(true);
         this.lobbyInfoText.setVisible(true);
         this.readyButton.setVisible(true);
 
@@ -627,7 +666,7 @@ const config = {
     parent: 'game-container',
     width: 1200,
     height: 800,
-    backgroundColor: '#2d2d2d',
+    backgroundColor: '#0D450A',
     render: { pixelArt: true, antialias: false },
     scene: [MainMenuScene, SinglePlayerScene, MultiplayerScene] 
 };

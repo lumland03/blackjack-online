@@ -307,6 +307,18 @@ function setupMultiplayerLogic(socket) {
             });
             // Auto advance turn if busted
             advanceTurn(currentRoomName);
+        } else if (player.score === 21) {
+            // ✅ Auto-stay when player reaches exactly 21
+            player.status = 'stayed';
+            io.to(currentRoomName).emit('playerUpdate', {
+                playerId: socket.id,
+                hand: player.hand,
+                score: player.score,
+                status: 'stayed'
+            });
+            console.log(`[Multiplayer] Player ${socket.id} reached 21 and automatically stayed`);
+            // Auto advance turn
+            advanceTurn(currentRoomName);
         } else {
             io.to(currentRoomName).emit('playerUpdate', {
                 playerId: socket.id,
