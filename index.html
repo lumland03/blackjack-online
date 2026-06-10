@@ -1,11 +1,704 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiplayer Blackjack — Landon Umland · AI + Design</title>
+  <meta name="description" content="A real-time multiplayer blackjack game built with AI collaboration. Case study by Landon Umland, AI + Design, EWU.">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+
+  <!-- ── NAVIGATION ─────────────────────── -->
+  <nav class="nav" id="nav" aria-label="Site navigation">
+    <span class="nav-brand">♠ Landon Umland</span>
+    <ul class="nav-links" role="list">
+      <li><a href="#research"   class="nav-link">Research</a></li>
+      <li><a href="#process"    class="nav-link">Process</a></li>
+      <li><a href="#product"    class="nav-link">Product</a></li>
+      <li><a href="#reflection" class="nav-link">Reflection</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- ════════════════════════════════════
+         HERO
+         ════════════════════════════════════ -->
+    <section id="hero" class="hero" aria-labelledby="hero-heading">
+      <div class="hero-content">
+
+        <div class="hero-text">
+          <p class="hero-meta">AI + Design &nbsp;·&nbsp; EWU &nbsp;·&nbsp; Spring 2026</p>
+          <h1 class="hero-title" id="hero-heading">Multiplayer<br>Blackjack</h1>
+          <p class="hero-subtitle">
+            I built a playable real-time multiplayer blackjack game using AI-assisted code generation
+            to understand how frontend and backend frameworks interact and communicate.
+          </p>
+          <p class="hero-byline">Landon Umland</p>
+          <div class="hero-actions">
+            <a href="https://blackjack-online-2zlx.onrender.com" target="_blank" rel="noopener" class="btn btn-primary">
+              Play the Game ↗
+            </a>
+            <a href="#research" class="btn btn-ghost">Read the Case Study ↓</a>
+          </div>
+        </div>
+
+        <figure class="hero-figure">
+          <img
+            src="images/game-screenshot.png"
+            alt="Blackjack game showing the DEAL AGAIN screen with pixel card sprites — 7 of clubs, 2 of clubs, King of clubs vs 5 of spades, 5 of hearts, 7 of diamonds"
+          >
+          <figcaption>Singleplayer result screen — pixel card sprites, dark background, monospaced display font</figcaption>
+        </figure>
+
+      </div>
+
+      <!-- Decorative suit symbols -->
+      <div class="hero-suits" aria-hidden="true">
+        <span>♠</span><span>♥</span><span>♦</span><span>♣</span>
+      </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════
+         01 / RESEARCH
+         Approach, Inquiry, Evidence
+         ════════════════════════════════════ -->
+    <section id="research" class="section" aria-labelledby="research-heading">
+      <div class="container">
+
+        <header class="section-header">
+          <span class="section-label">01 / Research</span>
+          <h2 class="section-title" id="research-heading">Approach &amp; Inquiry</h2>
+        </header>
+
+        <!-- Core Inquiry Question -->
+        <div class="inquiry-block">
+          <p class="inquiry-label">Core Inquiry Question</p>
+          <blockquote class="inquiry-question">
+            "What are the interactions between front and backend frameworks,
+            and how do I write and navigate them?"
+          </blockquote>
+          <p class="inquiry-why">
+            Most of my prior coding had been isolated — either frontend or backend, but not both talking to each other.
+            This question was about the <em>relationship</em> between client-side and server-side code:
+            not a specific framework, but the architecture that connects them.
+            It felt like the bridge between "knowing how to code" and "understanding why web development is complex."
+          </p>
+        </div>
+
+        <!-- Research Method -->
+        <h3 class="subsection-title">Research Method</h3>
+        <div class="method-block">
+          No traditional tutorials or reading lists. Claude and Gemini were the primary resources.
+          Documentation (Node.js, Phaser, Socket.IO, Render) was studied through NotebookLM to build
+          enough fluency to understand what the AI was producing. Verification came from active play testing:
+          when code broke, I reported the error. When models disagreed, I cross-checked their outputs.
+          The quiz results below are evidence of that engagement — not just reading, but testing retention.
+        </div>
+
+        <!-- Research Phases -->
+        <h3 class="subsection-title">Three Research Phases</h3>
+        <div class="phase-grid">
+
+          <article class="phase-card">
+            <span class="phase-number" aria-hidden="true">01</span>
+            <h4 class="phase-title">Learning-Focused</h4>
+            <p class="phase-tag">Early Stage</p>
+            <ul class="phase-list">
+              <li>Ask AI to write code, then explain it back</li>
+              <li>Note-taking, reading explanations</li>
+              <li>Trying to understand before moving on</li>
+            </ul>
+            <p class="phase-outcome">Built basic mental model — but slow progress</p>
+          </article>
+
+          <article class="phase-card phase-card--active">
+            <span class="phase-number" aria-hidden="true">02</span>
+            <h4 class="phase-title">Efficiency-Focused</h4>
+            <p class="phase-tag">After Time Crunch</p>
+            <ul class="phase-list">
+              <li>Claude and Gemini cross-verify each other</li>
+              <li>Active play testing, bug reporting, iteration cycles</li>
+              <li>Use console errors to describe problems precisely</li>
+            </ul>
+            <p class="phase-outcome">Faster code generation — less personal understanding</p>
+          </article>
+
+          <article class="phase-card">
+            <span class="phase-number" aria-hidden="true">03</span>
+            <h4 class="phase-title">Polish</h4>
+            <p class="phase-tag">Final Stage</p>
+            <ul class="phase-list">
+              <li>Styling and formatting adjustments</li>
+              <li>Color, coordinate, and typography tweaks</li>
+              <li>Visual coherence pass</li>
+            </ul>
+            <p class="phase-outcome">Functional and visually coherent game</p>
+          </article>
+
+        </div>
+
+        <!-- Documentation Sources + Quiz Evidence -->
+        <h3 class="subsection-title">Documentation Sources &amp; Verification</h3>
+        <p class="source-intro">
+          Each tool had its own documentation studied through NotebookLM. These quiz results are process
+          evidence — each score represents a self-test after reading through official docs.
+        </p>
+
+        <div class="evidence-grid">
+
+          <article class="evidence-card">
+            <div class="evidence-header">
+              <h4>Phaser.io Docs</h4>
+              <a href="https://docs.phaser.io/" target="_blank" rel="noopener" class="source-link">docs.phaser.io ↗</a>
+            </div>
+            <p class="evidence-desc">
+              Canvas rendering engine used for the game client. Studied for scene management,
+              sprite atlas loading, card rendering, and tween animations.
+            </p>
+            <figure class="evidence-figure">
+              <img src="images/quiz-phaser.png" alt="Phaser NotebookLM quiz result: 8 out of 12 correct, 67%" loading="lazy">
+              <figcaption>NotebookLM self-quiz — 8/12 &nbsp;(67%)</figcaption>
+            </figure>
+          </article>
+
+          <article class="evidence-card">
+            <div class="evidence-header">
+              <h4>Socket.IO Docs</h4>
+              <a href="https://socket.io/docs/v4/" target="_blank" rel="noopener" class="source-link">socket.io/docs/v4 ↗</a>
+            </div>
+            <p class="evidence-desc">
+              The backbone of client-server communication. Studied for room management,
+              event emission, real-time state broadcasting, and connection lifecycle.
+            </p>
+            <figure class="evidence-figure">
+              <img src="images/quiz-socketio.png" alt="Socket.IO NotebookLM quiz result: 9 out of 10 correct, 90%" loading="lazy">
+              <figcaption>NotebookLM self-quiz — 9/10 &nbsp;(90%)</figcaption>
+            </figure>
+          </article>
+
+          <article class="evidence-card">
+            <div class="evidence-header">
+              <h4>Node.js Docs</h4>
+              <a href="https://nodejs.org/docs/latest/api/" target="_blank" rel="noopener" class="source-link">nodejs.org/docs ↗</a>
+            </div>
+            <p class="evidence-desc">
+              Backend runtime for the game server. Studied for the module system,
+              HTTP/networking, server architecture, and connection handling.
+            </p>
+            <figure class="evidence-figure">
+              <img src="images/quiz-nodejs.png" alt="Node.js NotebookLM quiz result: 13 out of 15 correct, 87%" loading="lazy">
+              <figcaption>NotebookLM self-quiz — 13/15 &nbsp;(87%)</figcaption>
+            </figure>
+          </article>
+
+          <article class="evidence-card">
+            <div class="evidence-header">
+              <h4>Render Docs</h4>
+              <a href="https://render.com/docs" target="_blank" rel="noopener" class="source-link">render.com/docs ↗</a>
+            </div>
+            <p class="evidence-desc">
+              Hosting platform for the live game. Studied for WebSocket support, service types,
+              deployment pipelines, and environment configuration.
+            </p>
+            <figure class="evidence-figure">
+              <img src="images/quiz-render.png" alt="Render NotebookLM quiz result: 10 out of 10 correct, 100%" loading="lazy">
+              <figcaption>NotebookLM self-quiz — 10/10 &nbsp;(100%)</figcaption>
+            </figure>
+          </article>
+
+        </div>
+
+        <!-- Key Discoveries -->
+        <h3 class="subsection-title">Key Discoveries</h3>
+        <div class="discovery-grid">
+
+          <div class="discovery-card">
+            <p class="discovery-stat">~98%</p>
+            <p class="discovery-label">of the final codebase is JavaScript</p>
+            <p class="discovery-note">
+              The complexity in web development lives in logic, not structure.
+              HTML and CSS are 2% of the work. Markup is easy. The game loop is not.
+            </p>
+          </div>
+
+          <div class="discovery-card">
+            <p class="discovery-stat">Exponential</p>
+            <p class="discovery-label">complexity added by multiplayer</p>
+            <p class="discovery-note">
+              Singleplayer state is local. Multiplayer requires turn management, lobby creation,
+              real-time sync, and state persistence — all on the server, all at once.
+            </p>
+          </div>
+
+          <div class="discovery-card">
+            <p class="discovery-stat">Different</p>
+            <p class="discovery-label">goals: understanding vs. shipping</p>
+            <p class="discovery-note">
+              I shipped a working multiplayer game. I don't have fluency in the code that powers it.
+              That's a real tradeoff I made consciously — and honestly.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════
+         02 / PROCESS
+         Workflow, Iteration, Pivots
+         ════════════════════════════════════ -->
+    <section id="process" class="section section--alt" aria-labelledby="process-heading">
+      <div class="container">
+
+        <header class="section-header">
+          <span class="section-label">02 / Process</span>
+          <h2 class="section-title" id="process-heading">Workflow &amp; Iteration</h2>
+        </header>
+
+        <!-- Scope Pivot -->
+        <div class="pivot-block">
+          <div class="pivot-col">
+            <h3 class="pivot-label pivot-label--original">Original Scope</h3>
+            <ul class="pivot-list">
+              <li>Heavily stylized UI with animations</li>
+              <li>Betting system and chip management</li>
+              <li>Insurance, splitting, doubling down</li>
+              <li>Sound effects and intricate visual design</li>
+            </ul>
+          </div>
+          <div class="pivot-arrow" aria-hidden="true">→</div>
+          <div class="pivot-col">
+            <h3 class="pivot-label pivot-label--actual">Actual Scope</h3>
+            <ul class="pivot-list pivot-list--actual">
+              <li>Core singleplayer and multiplayer modes</li>
+              <li>Functional dealer logic and turn management</li>
+              <li>Lobby, ready-up, and results system</li>
+              <li>Basic but coherent visual design</li>
+            </ul>
+          </div>
+        </div>
+        <p class="pivot-reason">
+          Time constraints outside the project forced a real engineering decision: choose completion over polish.
+          This turned out to be the right call.
+        </p>
+
+        <!-- Strategic Decision -->
+        <div class="strategy-callout">
+          <h3>Strategic Decision: Singleplayer First</h3>
+          <p>
+            Building singleplayer before multiplayer was deliberate, not accidental. Singleplayer let me test
+            game state and core logic without the added complexity of networking and real-time sync.
+            Once that worked, there was a stable jumping-off point — even though multiplayer required
+            significantly more code and a completely different architecture.
+          </p>
+        </div>
+
+        <!-- Iteration Timeline -->
+        <h3 class="subsection-title">Key Iterations</h3>
+        <ol class="timeline">
+
+          <li class="timeline-item">
+            <span class="timeline-number">01</span>
+            <div class="timeline-content">
+              <h4>Game Logic</h4>
+              <p>Dealer rules, turn management, card scoring, Ace handling (1 or 11)</p>
+            </div>
+          </li>
+
+          <li class="timeline-item">
+            <span class="timeline-number">02</span>
+            <div class="timeline-content">
+              <h4>Singleplayer Flow</h4>
+              <p>Start screen, hit, stay, result resolution, deal-again loop</p>
+            </div>
+          </li>
+
+          <li class="timeline-item">
+            <span class="timeline-number">03</span>
+            <div class="timeline-content">
+              <h4>Multiplayer Lobby</h4>
+              <p>Room creation by name, player joining (up to 4), ready-up system, turn order assignment</p>
+            </div>
+          </li>
+
+          <li class="timeline-item">
+            <span class="timeline-number">04</span>
+            <div class="timeline-content">
+              <h4>Turn Management</h4>
+              <p>
+                Players act in order. Hit and stay buttons are only visible when it's your turn.
+                All other clients see the state update in real time.
+              </p>
+            </div>
+          </li>
+
+          <li class="timeline-item timeline-item--gold">
+            <span class="timeline-number">05</span>
+            <div class="timeline-content">
+              <h4>Dealer Animation — a UX Discovery</h4>
+              <p>
+                Play testing revealed the instant result felt wrong — like nothing was happening.
+                I pushed to add a 1–2 second delay with "Dealer Drawing..." text. Small change, big impact.
+                This came from noticing a problem, not from planning for it.
+              </p>
+            </div>
+          </li>
+
+        </ol>
+
+        <!-- Prompt Evolution -->
+        <h3 class="subsection-title">How Prompts Evolved</h3>
+        <div class="prompt-evolution">
+
+          <div class="prompt-stage">
+            <span class="prompt-stage-label">Early — Vague</span>
+            <div class="prompt-example prompt-example--vague">
+              <p class="prompt-text">"Write me a multiplayer blackjack game with a backend and frontend."</p>
+              <p class="prompt-result">Too open-ended. Required extensive back-and-forth to define scope. Output was inconsistent.</p>
+            </div>
+            <div class="prompt-example prompt-example--vague">
+              <p class="prompt-text">"Can you explain how this code works?"</p>
+              <p class="prompt-result">Learning-focused. Slowed progress but built a basic mental model of what was happening.</p>
+            </div>
+          </div>
+
+          <div class="prompt-stage">
+            <span class="prompt-stage-label">Later — Specific</span>
+            <div class="prompt-example prompt-example--specific">
+              <p class="prompt-text">"I'm getting [this console error]. Here's the relevant code. I expected X to happen but Y happened instead. How do I fix it?"</p>
+              <p class="prompt-result">Specific context. AI fixed it correctly more often. Fewer clarifying questions going back and forth.</p>
+            </div>
+            <div class="prompt-example prompt-example--specific">
+              <p class="prompt-text">"I need to add a dealer animation so you see the dealer drawing the cards — not just calculating it all at once."</p>
+              <p class="prompt-result">Clear UX requirement. AI implemented the delay and "Dealer Drawing..." message correctly on the first attempt.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Process Screenshots -->
+        <div class="process-images">
+
+          <figure class="process-figure">
+            <img
+              src="images/server-code.png"
+              alt="Server-side JavaScript code open in a dark editor showing deck initialization and Socket.IO connection logic"
+              loading="lazy"
+            >
+            <figcaption>
+              Server-side game code — Node.js with Socket.IO. Deck management and real-time room logic.
+              Written by AI, directed by me through testing and reporting.
+            </figcaption>
+          </figure>
+
+          <figure class="process-figure">
+            <img
+              src="images/credit-limit.png"
+              alt="Claude message: You are out of free messages until 2:20 AM"
+              loading="lazy"
+            >
+            <figcaption>
+              The credit crunch — hit Claude's free message limit three times during development.
+              Forced strategic prioritization: which bugs matter most right now?
+            </figcaption>
+          </figure>
+
+        </div>
+
+        <!-- Model Switching Note -->
+        <div class="model-note">
+          <h3>AI Tools &amp; Model Switching</h3>
+          <p>
+            Started with Gemini for initial coding. Switched to Claude as the primary tool after Claude caught
+            more errors during cross-verification passes. The assumption was that AI models would be objective
+            about each other's code. They mostly were — but both still introduced bugs.
+          </p>
+          <p>
+            Ran out of Claude credits three times mid-development. Swapped between models strategically
+            to keep making progress while waiting for limits to reset. This forced prioritization:
+            which problems were blocking, and which could wait.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════
+         03 / PRODUCT
+         The Game, Authorship, Synthesis
+         ════════════════════════════════════ -->
+    <section id="product" class="section" aria-labelledby="product-heading">
+      <div class="container">
+
+        <header class="section-header">
+          <span class="section-label">03 / Product</span>
+          <h2 class="section-title" id="product-heading">The Game</h2>
+        </header>
+
+        <!-- Live Game CTA -->
+        <div class="product-cta">
+          <div class="product-cta-text">
+            <h3>Playable. Multiplayer. Live.</h3>
+            <p>
+              Deployed on Render with real-time WebSocket connections via Socket.IO.
+              Up to four players can create or join a lobby by name, ready up, and play a full hand
+              of blackjack against a shared dealer — all in real time across separate browsers.
+            </p>
+            <a href="https://blackjack-online-2zlx.onrender.com" target="_blank" rel="noopener" class="btn btn-primary btn-large">
+              Play the Game ↗
+            </a>
+            <p class="cta-note">Hosted on Render — may take 20–30 seconds to spin up from a cold start.</p>
+          </div>
+          <figure class="product-screenshot">
+            <img
+              src="images/game-screenshot.png"
+              alt="The blackjack game showing card sprites on a dark background with a DEAL AGAIN prompt"
+              loading="lazy"
+            >
+          </figure>
+        </div>
+
+        <!-- Feature Breakdown -->
+        <h3 class="subsection-title">What It Does</h3>
+        <div class="feature-grid">
+
+          <div class="feature-group">
+            <h4 class="feature-group-title">Menu</h4>
+            <ul class="feature-list">
+              <li>Choose singleplayer or multiplayer</li>
+            </ul>
+          </div>
+
+          <div class="feature-group">
+            <h4 class="feature-group-title">Singleplayer</h4>
+            <ul class="feature-list">
+              <li>Play against the dealer</li>
+              <li>Hit or stay</li>
+              <li>See result, deal again</li>
+            </ul>
+          </div>
+
+          <div class="feature-group">
+            <h4 class="feature-group-title">Multiplayer</h4>
+            <ul class="feature-list">
+              <li>Create or join a room by name (2–4 players)</li>
+              <li>Ready up to start</li>
+              <li>Turn-based — buttons only show on your turn</li>
+              <li>"Dealer Drawing..." delay before results</li>
+              <li>Results screen: win / loss / push / bust per player</li>
+              <li>Play again without leaving the lobby</li>
+            </ul>
+          </div>
+
+          <div class="feature-group feature-group--cut">
+            <h4 class="feature-group-title">Didn't Ship</h4>
+            <ul class="feature-list feature-list--cut">
+              <li>Betting system</li>
+              <li>Insurance</li>
+              <li>Doubling down</li>
+              <li>Card flip animations</li>
+              <li>Sound effects</li>
+              <li>Stylized visual design</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Authorship -->
+        <h3 class="subsection-title">Authorship &amp; Synthesis</h3>
+        <p class="authorship-intro">
+          Authorship is more than who typed the code. Here is an honest breakdown of who made what —
+          and how I directed the outcome even when I wasn't writing the logic.
+        </p>
+
+        <div class="authorship-grid">
+
+          <div class="authorship-col authorship-col--me">
+            <h4>What I Wrote</h4>
+            <ul>
+              <li>HTML structure (index.html)</li>
+              <li>All color decisions — greens, blues, yellows</li>
+              <li>Background and layout styling</li>
+              <li>Typography choices</li>
+              <li>Card and button coordinate positioning</li>
+            </ul>
+          </div>
+
+          <div class="authorship-col authorship-col--ai">
+            <h4>What AI Wrote</h4>
+            <ul>
+              <li>All functional JavaScript — game logic, turn management, dealer rules</li>
+              <li>Multiplayer networking — Socket.IO client events, room sync</li>
+              <li>All backend code — Node.js, room management, real-time state</li>
+              <li>Every bug fix, based on my testing reports</li>
+            </ul>
+          </div>
+
+          <div class="authorship-col authorship-col--direction">
+            <h4>How I Directed It</h4>
+            <ul>
+              <li>Identified every problem through play testing</li>
+              <li>Described bugs with console errors + reproduction steps</li>
+              <li>Made the architectural call: singleplayer first</li>
+              <li>Cut scope to ship something working rather than broken</li>
+              <li>Caught the dealer animation problem — pushed until it was fixed</li>
+              <li>Owned all visual and aesthetic decisions</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Card Sprite Asset Note -->
+        <div class="asset-note">
+          <figure class="asset-figure">
+            <img
+              src="images/playing-cards.png"
+              alt="Pixel art playing card sprite sheet — full deck of cards on a white background, used in the game"
+              loading="lazy"
+            >
+            <figcaption>Pixel card sprite sheet — loaded via Phaser atlas XML. These are the actual game assets.</figcaption>
+          </figure>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════
+         04 / REFLECTION
+         Learning, What Changed, What's Next
+         ════════════════════════════════════ -->
+    <section id="reflection" class="section section--alt" aria-labelledby="reflection-heading">
+      <div class="container">
+
+        <header class="section-header">
+          <span class="section-label">04 / Reflection</span>
+          <h2 class="section-title" id="reflection-heading">What I Learned</h2>
+        </header>
+
+        <div class="reflection-body">
+
+          <div class="reflection-para">
+            <h3>Building vs. Learning</h3>
+            <p>
+              This project taught me the difference between <em>building</em> and <em>learning</em>.
+              I came in wanting to understand frontend-backend interactions through deep, deliberate study.
+              I left with a working multiplayer game and a surface-level understanding of how it functions.
+              That's not failure — it's pragmatism. But it's also incomplete.
+              I shipped a working product that demonstrates understanding of how client-server interaction works,
+              even though I couldn't sit down and explain the actual Socket.IO implementation in detail.
+              Understanding and shipping are different goals, and I had to choose between them.
+              I chose to ship.
+            </p>
+          </div>
+
+          <div class="reflection-para">
+            <h3>Time, Scope, and Real Engineering</h3>
+            <p>
+              The time crunch forced real engineering decisions: build singleplayer first, cut features,
+              report bugs precisely instead of vaguely, stop learning and start shipping.
+              Those decisions were smart. But they also meant I couldn't afford the learning-focused
+              approach I started with. I got faster, but less deep.
+              Running out of AI credits three times mid-development wasn't something I planned for —
+              it's just what happened. It taught me that time and credits are real constraints, not abstract ones,
+              and that being strategic about which problems to solve first matters more than I expected
+              going into a project like this.
+            </p>
+          </div>
+
+          <div class="reflection-para">
+            <h3>What AI Actually Is — and What's Next</h3>
+            <p>
+              I started thinking AI would be objective: cross-verifying models would guarantee correct output.
+              I learned that AI tools are helpful but imperfect. Neither Claude nor Gemini is neutral.
+              Both make mistakes. The best workflow I found was iterative: report a specific problem,
+              AI fixes it, test it, report the next problem. Long-term, I want to go back to this codebase
+              and actually understand it — not immediately, but eventually.
+              This project gave me a clear map of what I need to learn next:
+              JavaScript deeply, Socket.IO specifically, and real-time state management across environments.
+              That's a more useful outcome than I expected.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Workspace Links -->
+        <h3 class="subsection-title">Workspaces &amp; Links</h3>
+        <div class="links-row">
+
+          <a href="https://blackjack-online-2zlx.onrender.com" target="_blank" rel="noopener" class="workspace-link workspace-link--primary">
+            <span class="link-icon" aria-hidden="true">▶</span>
+            <span class="link-text">
+              <strong>Play the Game</strong>
+              <small>blackjack-online-2zlx.onrender.com</small>
+            </span>
+          </a>
+
+          <!-- Replace [YOUR-GITHUB-URL] with your actual GitHub repo URL -->
+          <span class="workspace-link workspace-link--placeholder" title="Add your GitHub repo URL to the HTML">
+            <span class="link-icon" aria-hidden="true">⌥</span>
+            <span class="link-text">
+              <strong>GitHub Repository</strong>
+              <small>[ Add your repo URL in index.html ]</small>
+            </span>
+          </span>
+
+          <!-- Replace [YOUR-MILANOTE-URL] with your actual Milanote board URL -->
+          <span class="workspace-link workspace-link--placeholder" title="Add your Milanote board URL to the HTML">
+            <span class="link-icon" aria-hidden="true">◈</span>
+            <span class="link-text">
+              <strong>Milanote Board</strong>
+              <small>[ Add your Milanote URL in index.html ]</small>
+            </span>
+          </span>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ── FOOTER ─────────────────────────── -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="footer-name">Landon Umland</p>
+      <p class="footer-course">AI + Design &nbsp;·&nbsp; EWU &nbsp;·&nbsp; Spring 2026</p>
+      <p class="footer-suits" aria-hidden="true">♠ ♥ ♦ ♣</p>
+    </div>
+  </footer>
+
+
+  <!-- Highlight active nav link based on scroll position -->
+  <script>
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            navLinks.forEach((link) => {
+              link.classList.toggle(
+                'nav-link--active',
+                link.getAttribute('href') === '#' + entry.target.id
+              );
+            });
+          }
+        });
+      },
+      { rootMargin: '-20% 0px -70% 0px' }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  </script>
+
 </body>
 </html>
